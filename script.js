@@ -83,4 +83,3 @@ Saya ingin memesan kopi berikut:
   cart = [];
   renderCart();
 }
-
