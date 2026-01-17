@@ -27,7 +27,7 @@ function tambahKeranjang() {
   renderCart();
 }
 
-// Render keranjang ke halaman
+// Render keranjang
 function renderCart() {
   let list = document.getElementById("cartList");
   list.innerHTML = "";
@@ -47,14 +47,14 @@ function renderCart() {
     "Total: Rp" + total.toLocaleString("id-ID");
 }
 
-// Checkout ke WhatsApp (spasi & enter normal)
+// Checkout ke WhatsApp
 function checkout() {
   if (cart.length === 0) {
     alert("Keranjang masih kosong!");
     return;
   }
 
-  // Buat pesan WA, gunakan \n untuk baris baru
+  // Buat pesan WA
   let pesan = `Halo Panasea Coffee,
 
 Saya ingin memesan kopi berikut:
@@ -71,13 +71,12 @@ Saya ingin memesan kopi berikut:
   pesan += `Total Bayar: Rp${total.toLocaleString("id-ID")}\n`;
   pesan += "Terima kasih 🙏";
 
-  // Nomor WhatsApp (format internasional, tanpa +)
-  let nomorWA = "6281234567890";
+  // Nomor WhatsApp (format internasional tanpa +)
+  let nomorWA = "6285693604172";
 
-  // Encode pesan hanya sekali
+  // Encode pesan agar spasi & enter tampil normal
   let linkWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
 
-  // Buka WA di tab baru
   window.open(linkWA, "_blank");
 
   // Reset keranjang
