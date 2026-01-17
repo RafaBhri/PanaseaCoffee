@@ -54,8 +54,12 @@ function checkout() {
     return;
   }
 
-  // Pesan WA
-  let pesan = `Halo Panasea Coffee,\n\nSaya ingin memesan kopi berikut:\n\n`;
+  // Buat pesan WA dengan enter \n, jangan pakai %0A manual
+  let pesan = `Halo Panasea Coffee,
+
+Saya ingin memesan kopi berikut:
+
+`;
 
   cart.forEach((item, index) => {
     let subtotal = item.harga * item.qty;
