@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panasea Coffee by Raf</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panasea Coffee</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>☕ Selamat datang di Website Panasea Coffee</h1>
-    <p>Silahkan pesan kopi yang kamu inginkan</p>
+  <!-- Logo -->
+  <img src="logo.png" alt="Panasea Coffee Logo" class="logo">
+  <h1>Panasea Coffee</h1>
+  <p>Beli kopi favoritmu dengan mudah</p>
 </header>
 
 <main class="container">
 
-    <!-- PRODUK -->
-    <section class="product">
-        <h2>Palm Sugar Latte</h2>
+  <!-- PRODUK -->
+  <section class="product">
+    <h2>Palm Sugar Latte</h2>
 
-        <label>Varian Rasa</label>
-        <select id="varian">
-            <option value="8000">Palm Sugar Latte (Less Sugar)</option>
-            <option value="9000">Palm Sugar (Latte Normal)</option>
-        </select>
+    <label>Varian Rasa</label>
+    <select id="varian">
+      <option value="8000">Palm Sugar Latte (Less Sugar)</option>
+      <option value="9000">Palm Sugar Latte (Normal)</option>
+    </select>
 
-        <p id="harga">Harga: Rp8.000</p>
+    <p id="harga">Harga: Rp8.000</p>
 
-        <label>Jumlah</label>
-        <input type="number" id="qty" min="1" value="1">
+    <label>Jumlah</label>
+    <input type="number" id="qty" min="1" value="1">
 
-        <button onclick="tambahKeranjang()">Tambah ke Keranjang</button>
-    </section>
+    <button onclick="tambahKeranjang()">Tambah ke Keranjang</button>
+  </section>
 
-    <!-- KERANJANG -->
-    <section class="cart">
-        <h2>🛒 Keranjang</h2>
-        <ul id="cartList"></ul>
-        <h3 id="total">Total: Rp0</h3>
-        <button class="checkout" onclick="checkout()">Checkout via WhatsApp</button>
-    </section>
+  <!-- KERANJANG -->
+  <section class="cart">
+    <h2>🛒 Keranjang</h2>
+    <ul id="cartList"></ul>
+    <h3 id="total">Total: Rp0</h3>
+    <button class="checkout" onclick="checkout()">Checkout via WhatsApp</button>
+  </section>
 
 </main>
 
