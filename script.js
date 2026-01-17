@@ -1,6 +1,8 @@
+// Keranjang belanja
 let cart = [];
 let total = 0;
 
+// Update harga saat pilih varian
 document.getElementById("varian").addEventListener("change", updateHarga);
 
 function updateHarga() {
@@ -9,6 +11,7 @@ function updateHarga() {
     "Harga: Rp" + Number(harga).toLocaleString("id-ID");
 }
 
+// Tambah produk ke keranjang
 function tambahKeranjang() {
   let select = document.getElementById("varian");
   let varian = select.options[select.selectedIndex].text;
@@ -24,6 +27,7 @@ function tambahKeranjang() {
   renderCart();
 }
 
+// Render keranjang ke halaman
 function renderCart() {
   let list = document.getElementById("cartList");
   list.innerHTML = "";
@@ -43,31 +47,36 @@ function renderCart() {
     "Total: Rp" + total.toLocaleString("id-ID");
 }
 
+// Checkout ke WhatsApp
 function checkout() {
   if (cart.length === 0) {
     alert("Keranjang masih kosong!");
     return;
   }
 
-  let pesan = "Halo Panasea Coffee,%0A%0ASaya ingin memesan kopi berikut:%0A%0A";
+  // Pesan WA
+  let pesan = `Halo Panasea Coffee,\n\nSaya ingin memesan kopi berikut:\n\n`;
 
   cart.forEach((item, index) => {
     let subtotal = item.harga * item.qty;
-    pesan += `${index + 1}. ${item.varian}%0A`;
-    pesan += `Jumlah: ${item.qty}%0A`;
-    pesan += `Subtotal: Rp${subtotal.toLocaleString("id-ID")}%0A%0A`;
+    pesan += `${index + 1}. ${item.varian}\n`;
+    pesan += `Jumlah: ${item.qty}\n`;
+    pesan += `Subtotal: Rp${subtotal.toLocaleString("id-ID")}\n\n`;
   });
 
-  pesan += `Total Bayar: Rp${total.toLocaleString("id-ID")}%0A`;
+  pesan += `Total Bayar: Rp${total.toLocaleString("id-ID")}\n`;
   pesan += "Terima kasih 🙏";
 
-  // GANTI NOMOR WA DISINI (format internasional tanpa +)
+  // Nomor WhatsApp (format internasional tanpa +)
   let nomorWA = "6285693604172";
 
+  // Encode pesan agar spasi & enter terbaca benar
   let linkWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
+
+  // Buka WA di tab baru
   window.open(linkWA, "_blank");
 
-  // reset keranjang
+  // Reset keranjang
   cart = [];
   renderCart();
 }
