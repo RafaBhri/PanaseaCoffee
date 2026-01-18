@@ -11,6 +11,9 @@ function updateHarga() {
     "Harga: Rp" + Number(harga).toLocaleString("id-ID");
 }
 
+// Harga langsung sinkron saat load
+updateHarga();
+
 // Tambah produk ke keranjang
 function tambahKeranjang() {
   let select = document.getElementById("varian");
@@ -27,19 +30,43 @@ function tambahKeranjang() {
   renderCart();
 }
 
-// Render keranjang
+// Render keranjang + tombol hapus
 function renderCart() {
   let list = document.getElementById("cartList");
   list.innerHTML = "";
   total = 0;
 
-  cart.forEach(item => {
+  cart.forEach(function (item, index) {
     let subtotal = item.harga * item.qty;
     total += subtotal;
 
     let li = document.createElement("li");
-    li.textContent =
-      `${item.varian} x${item.qty} = Rp${subtotal.toLocaleString("id-ID")}`;
+
+    // Text item
+    let text = document.createElement("span");
+    text.textContent =
+      item.varian +
+      " x" +
+      item.qty +
+      " = Rp" +
+      subtotal.toLocaleString("id-ID");
+
+    // Tombol hapus
+    let btn = document.createElement("button");
+    btn.textContent = "❌";
+    btn.style.marginLeft = "10px";
+    btn.style.background = "#ccc";
+    btn.style.border = "none";
+    btn.style.borderRadius = "4px";
+    btn.style.cursor = "pointer";
+
+    btn.onclick = function () {
+      cart.splice(index, 1);
+      renderCart();
+    };
+
+    li.appendChild(text);
+    li.appendChild(btn);
     list.appendChild(li);
   });
 
@@ -54,32 +81,28 @@ function checkout() {
     return;
   }
 
-  // Buat pesan WA
   let pesan = `Halo Panasea Coffee,
 
 Saya ingin memesan kopi berikut:
 
 `;
 
-  cart.forEach((item, index) => {
+  cart.forEach(function (item, index) {
     let subtotal = item.harga * item.qty;
-    pesan += `${index + 1}. ${item.varian}\n`;
-    pesan += `Jumlah: ${item.qty}\n`;
-    pesan += `Subtotal: Rp${subtotal.toLocaleString("id-ID")}\n\n`;
+    pesan += index + 1 + ". " + item.varian + "\n";
+    pesan += "Jumlah: " + item.qty + "\n";
+    pesan += "Subtotal: Rp" + subtotal.toLocaleString("id-ID") + "\n\n";
   });
 
-  pesan += `Total Bayar: Rp${total.toLocaleString("id-ID")}\n`;
+  pesan += "Total Bayar: Rp" + total.toLocaleString("id-ID") + "\n";
   pesan += "Terima kasih 🙏";
 
-  // Nomor WhatsApp (format internasional tanpa +)
   let nomorWA = "6285693604172";
-
-  // Encode pesan agar spasi & enter tampil normal
-  let linkWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
+  let linkWA =
+    "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
 
   window.open(linkWA, "_blank");
 
-  // Reset keranjang
   cart = [];
   renderCart();
 }
